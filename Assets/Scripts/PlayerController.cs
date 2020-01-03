@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
 	private Rigidbody body;
 	public int speed;
+	public int count;
+	public Text countLabel;
 
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
+		count = 0;
+		UpdatePoints();
 	}
 
 	// Update is called once per frame
@@ -31,8 +36,17 @@ public class PlayerController : MonoBehaviour
 
 	void OnTriggerEnter(Collider other)
 	{
-        if(other.gameObject.CompareTag("PickUp"))
-		    other.gameObject.SetActive(false);
+		if (other.gameObject.CompareTag("PickUp"))
+		{
+			other.gameObject.SetActive(false);
+			count = count + 1;
+			UpdatePoints();
+		}
+	}
+
+    private void UpdatePoints()
+	{
+		countLabel.text = "Points: " + count.ToString();
 	}
 
 }
