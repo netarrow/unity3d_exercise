@@ -9,11 +9,13 @@ public class PlayerController : MonoBehaviour
 	public int speed;
 	public int count;
 	public Text countLabel;
+	public Text win;
 
 	void Start()
 	{
 		body = GetComponent<Rigidbody>();
 		count = 0;
+		win.text = "";
 		UpdatePoints();
 	}
 
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private void UpdatePoints()
 	{
 		countLabel.text = "Points: " + count.ToString();
+        if(count >= 10) win.text = "You Win!";
 	}
 
 }
